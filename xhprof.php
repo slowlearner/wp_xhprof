@@ -15,8 +15,8 @@ add_action('plugins_loaded', 'wp_xhprof_start');
 function wp_xhprof_start() {
     include_once dirname(__FILE__).'/xhprof_lib/utils/xhprof_lib.php';
     include_once dirname(__FILE__).'/xhprof_lib/utils/xhprof_runs.php';
-    $profile_cpu_n_mem = XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY;
-    xhprof_enable();
+    $profile_cpu_n_mem = XHPROF_FLAGS_NO_BUILTINS | XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY;
+    xhprof_enable($profile_cpu_n_mem);
 }
 add_action('shutdown', 'wp_xhprof_end');
 function wp_xhprof_end() {
